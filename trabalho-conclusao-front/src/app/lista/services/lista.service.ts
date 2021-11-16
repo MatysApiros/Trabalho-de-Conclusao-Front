@@ -30,7 +30,18 @@ export class ListaService {
     return this.http.get(`${URL}utis`)
     .pipe(
       map((response: any) => {
-        response.utis.map((hospital: any) => delete hospital._id)
+
+        response.utis.map((hospital: any) => delete hospital._id);
+        response.utis.map((hospital: any) => hospital.label = 'Hospitais');
+        response.utis.map((hospital: any) => {
+
+          const percent = parseFloat(hospital.percentualLotacao);
+
+          if (isNaN(percent)) {
+            hospital.percentualLotacao = 'Não Informado';
+          }
+        });
+
         return response.utis;
       })
     );

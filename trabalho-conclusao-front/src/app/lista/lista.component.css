@@ -36,18 +36,13 @@ tr.example-element-row:not(.example-expanded-row):active {
   height: 104px;
 }
 
-.example-element-symbol {
-  font-weight: bold;
-  font-size: 40px;
-  line-height: normal;
-}
-
 .example-element-description {
-  padding: 16px;
+  width: 100%;
+  padding: 16px 0;
 }
 
-.example-element-description-attribution {
-  opacity: 0.5;
+.informacoes-extras {
+  padding: 5px 0;
 }
 
 section {
@@ -57,3 +52,32 @@ section {
   align-items: center;
   padding: 50px 0;
 }
+
+td {
+  color: #212121;
+  font-weight: 500;
+  background-color: #EEEEEE;
+}
+
+th {
+  color: #FAFAFA;
+  font-weight: 500;
+  background-color: #3f51b5;
+}
+
+#percentualLotacaoEmergencias,
+#dataAtualizacaoEmergengias,
+#percentualLotacaoUtis,
+#dataAtualizacaoUtis {
+  text-align: center;
+}
+
+.paginator {
+  color: #FAFAFA;
+  font-weight: 500;
+  background-color: #3f51b5;
+}
+
+.low { background-color: #66BB6A; }
+.medium { background-color: #FFCA28; }
+.high { background-color: #EF5350; }
