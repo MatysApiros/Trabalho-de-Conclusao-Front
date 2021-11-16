@@ -6,6 +6,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSortModule } from '@angular/material/sort';
+import { MatIconModule } from '@angular/material/icon';
 import { ListaRoutingModule } from './routes/lista-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -23,6 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatExpansionModule,
     MatTabsModule,
     MatSortModule,
+    MatIconModule,
   ]
 })
 export class ListaModule { }
