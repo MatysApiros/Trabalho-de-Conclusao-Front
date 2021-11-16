@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  baseUrl: 'https://hospitais-porto-alegre-back.herokuapp.com/',
 };

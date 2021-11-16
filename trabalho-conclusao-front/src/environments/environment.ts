@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'https://hospitais-porto-alegre-back.herokuapp.com/'
+  baseUrl: 'https://hospitais-porto-alegre-back.herokuapp.com/',
 };
 
 /*
