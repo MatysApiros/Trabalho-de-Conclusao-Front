@@ -1,5 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -12,10 +12,10 @@ import { ListaService } from './services/lista.service';
   styleUrls: ['./lista.component.css'],
   animations: [
     trigger('detailExpand', [
-      state('collapsed', style({height: '0px', minHeight: '0', display: 'none'})),
+      state('collapsed, void', style({height: '0px', minHeight: '0', display: 'none'})),
       state('expanded', style({height: '*'})),
-      transition('expanded => collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-      transition('collapsed => expanded', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+      transition('expanded <=> void', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)'))
     ]),
   ],
 })
@@ -26,6 +26,10 @@ export class ListaComponent implements OnInit {
   dataSourceUtis!: MatTableDataSource<Hospital>;
   panelOpenState = false;
   expandedElement!: Hospital;
+  modoDaltonico = false;
+  colorHigh = 'high';
+  colorMedium = 'medium';
+  colorLow = 'low';
 
   @ViewChildren(MatPaginator) paginator = new QueryList<MatPaginator>();
   @ViewChildren(MatSort) sort = new QueryList<MatSort>();
@@ -49,7 +53,7 @@ export class ListaComponent implements OnInit {
 
       this.dataSourceUtis = new MatTableDataSource<Hospital>(utisData);
       this.dataSourceUtis.paginator = this.paginator.toArray()[1];
-      this.dataSourceUtis.sort = this.sort.toArray()[0];
+      this.dataSourceUtis.sort = this.sort.toArray()[1];
     });
   }
 
@@ -68,18 +72,18 @@ export class ListaComponent implements OnInit {
     const percent = parseFloat(percentual);
 
     if (percent >= 75) {
-      return 'high';
+      return this.colorHigh;
     }
 
     if (percent < 75 && percent >= 40) {
-      return 'medium';
+      return this.colorMedium;
     }
 
     if (isNaN(percent)) {
-      return 'high';
+      return this.colorHigh;
     }
 
-    return 'low';
+    return this.colorLow;
   }
 
   public compararNumeros(emergencias: Hospital[]) {
@@ -94,5 +98,20 @@ export class ListaComponent implements OnInit {
     return mapped.map(function(el){
       return emergencias[el.index];
     });
+  }
+
+  public setModoDaltonico(modoDaltonico: boolean) {
+
+    if (modoDaltonico !== this.modoDaltonico) {
+      this.modoDaltonico = modoDaltonico;
+      this.colorHigh = 'daltonicoHigh';
+      this.colorMedium = 'daltonicoMedium';
+      this.colorLow = 'daltonicoLow';
+    } else {
+      this.modoDaltonico = false;
+      this.colorHigh = 'high';
+      this.colorMedium = 'medium';
+      this.colorLow = 'low';
+    }
   }
 }

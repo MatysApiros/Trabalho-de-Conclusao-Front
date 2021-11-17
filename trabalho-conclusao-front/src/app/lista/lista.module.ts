@@ -7,6 +7,7 @@ import { MatExpansionModule } from "@angular/material/expansion";
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSortModule } from '@angular/material/sort';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ListaRoutingModule } from './routes/lista-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -25,6 +26,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatTabsModule,
     MatSortModule,
     MatIconModule,
+    MatSlideToggleModule,
   ]
 })
 export class ListaModule { }

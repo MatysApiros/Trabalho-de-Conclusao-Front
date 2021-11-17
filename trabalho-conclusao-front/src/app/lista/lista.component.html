@@ -1,29 +1,29 @@
 <mat-tab-group>
   <mat-tab label="Lista de Emergências">
-    <section>
+    <section class="listas">
       <div>
-        <table mat-table [dataSource]="dataSourceEmergencias" multiTemplateDataRows class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSourceEmergencias" multiTemplateDataRows matSort class="mat-elevation-z8">
 
           <ng-container matColumnDef="nomeHospital">
-            <th mat-header-cell *matHeaderCellDef> Hospital </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Hospital </th>
             <td mat-cell *matCellDef="let element"> {{element.nomeHospital}} - {{ element.especializacao }} </td>
           </ng-container>
 
           <ng-container matColumnDef="dataAtualizacao">
-            <th mat-header-cell *matHeaderCellDef id="dataAtualizacaoEmergengias"> Data Última Atualização </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header id="dataAtualizacaoEmergengias"> Data Última Atualização </th>
             <td mat-cell *matCellDef="let element" align="center"> {{element.dataAtualizacao}} </td>
           </ng-container>
 
           <ng-container matColumnDef="percentualLotacao">
-            <th mat-header-cell *matHeaderCellDef id="percentualLotacaoEmergencias"> Percentual de Lotação </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header id="percentualLotacaoEmergencias"> Percentual de Lotação </th>
             <td mat-cell *matCellDef="let element" align="center" [ngClass]="this.getCorColunaPercentualLotacao(element.percentualLotacao)"> {{element.percentualLotacao}} </td>
           </ng-container>
 
-          <ng-container matColumnDef="expandedDetail">
+          <ng-container matColumnDef="detalhes">
             <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
-              <div class="example-element-detail"
+              <div class="mais-detalhes-container"
                    [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-                <div class="example-element-description">
+                <div class="mais-detalhes">
                   <div class="informacoes-extras">
                     Nº de Leitos: {{element.leitos}}
                   </div>
@@ -43,11 +43,10 @@
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let element; columns: displayedColumns;"
-              class="example-element-row"
-              [class.example-expanded-row]="expandedElement === element"
+              class="hospital-row"
               (click)="this.setElementoAberto(element)">
           </tr>
-          <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+          <tr mat-row *matRowDef="let row; columns: ['detalhes']" class="detalhes"></tr>
         </table>
 
         <mat-paginator
@@ -63,30 +62,30 @@
   </mat-tab>
 
   <mat-tab label="Lista de UTIs">
-    <section>
+    <section class="listas">
       <div>
-        <table mat-table [dataSource]="dataSourceUtis" multiTemplateDataRows class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSourceUtis" multiTemplateDataRows matSort class="mat-elevation-z8">
 
           <ng-container matColumnDef="nomeHospital">
-            <th mat-header-cell *matHeaderCellDef > Hospital </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Hospital </th>
             <td mat-cell *matCellDef="let element"> {{element.nomeHospital}} - {{ element.especializacao }} </td>
           </ng-container>
 
           <ng-container matColumnDef="dataAtualizacao">
-            <th mat-header-cell *matHeaderCellDef id="dataAtualizacaoUtis"> Data Última Atualização </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header id="dataAtualizacaoUtis"> Data Última Atualização </th>
             <td mat-cell *matCellDef="let element" align="center"> {{element.dataAtualizacao}} </td>
           </ng-container>
 
           <ng-container matColumnDef="percentualLotacao">
-            <th mat-header-cell *matHeaderCellDef id="percentualLotacaoUtis"> Percentual de Lotação </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header id="percentualLotacaoUtis"> Percentual de Lotação </th>
             <td mat-cell *matCellDef="let element" align="center" [ngClass]="this.getCorColunaPercentualLotacao(element.percentualLotacao)"> {{element.percentualLotacao}} </td>
           </ng-container>
 
-          <ng-container matColumnDef="expandedDetail">
+          <ng-container matColumnDef="detalhes">
             <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
-              <div class="example-element-detail"
+              <div class="mais-detalhes-container"
                    [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-                <div class="example-element-description">
+                <div class="mais-detalhes">
                   <div class="informacoes-extras">
                     Nº de Leitos: {{element.leitos}}
                   </div>
@@ -106,11 +105,10 @@
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let element; columns: displayedColumns;"
-              class="example-element-row"
-              [class.example-expanded-row]="expandedElement === element"
+              class="hospital-row"
               (click)="this.setElementoAberto(element)">
           </tr>
-          <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+          <tr mat-row *matRowDef="let row; columns: ['detalhes']" class="detalhes"></tr>
         </table>
 
         <mat-paginator
@@ -125,6 +123,10 @@
 
   </mat-tab>
 </mat-tab-group>
+
+<section id="toggle">
+  <mat-slide-toggle color="primary" (change)="this.setModoDaltonico(true)">Modo Daltonico</mat-slide-toggle>
+</section>
 
 <section id="info">
   <mat-icon color="primary">info</mat-icon>
